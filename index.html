@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBU Productivity Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>SBU Productivity Assistant</span>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#email-generator" class="nav-link" data-tab="email">Email Generator</a></li>
+                <li><a href="#notes-summarizer" class="nav-link" data-tab="notes">Notes Summarizer</a></li>
+                <li><a href="#task-planner" class="nav-link" data-tab="planner">Task Planner</a></li>
+                <li><a href="#about" class="nav-link" data-tab="about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to SBU Productivity Assistant</h1>
+                <p>Your AI-powered workplace productivity partner</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="navigateTo('email')">Get Started</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('about')">Learn More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Generator Tab -->
+        <section id="email-generator" class="tab-content active" data-tab="email">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-envelope"></i> Smart Email Generator</h2>
+                    <p>Generate professional, context-based emails in seconds</p>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="form-section">
+                        <form id="emailForm">
+                            <div class="form-group">
+                                <label for="emailRecipient">Recipient Type *</label>
+                                <select id="emailRecipient" required>
+                                    <option value="">Select audience...</option>
+                                    <option value="client">Client</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="team">Team Member</option>
+                                    <option value="colleague">Colleague</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="emailTone">Email Tone *</label>
+                                <select id="emailTone" required>
+                                    <option value="">Select tone...</option>
+                                    <option value="formal">Formal</option>
+                                    <option value="informal">Informal</option>
+                                    <option value="persuasive">Persuasive</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="emailPurpose">Email Purpose *</label>
+                                <select id="emailPurpose" required>
+                                    <option value="">Select purpose...</option>
+                                    <option value="meeting_request">Meeting Request</option>
+                                    <option value="project_update">Project Update</option>
+                                    <option value="follow_up">Follow-up</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="proposal">Proposal</option>
+                                    <option value="apology">Apology</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="emailContext">Context / Key Points *</label>
+                                <textarea id="emailContext" placeholder="Add relevant context, key points, or details..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <i class="fas fa-wand-magic-sparkles"></i> Generate Email
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="output-section">
+                        <div id="emailOutput" class="output-box">
+                            <p class="placeholder-text">Your generated email will appear here...</p>
+                        </div>
+                        <button id="copyEmailBtn" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-copy"></i> Copy Email
+                        </button>
+                        <button id="downloadEmailBtn" class="btn btn-secondary" style="display: none; margin-left: 10px;">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes Summarizer Tab -->
+        <section id="notes-summarizer" class="tab-content" data-tab="notes">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-alt"></i> Meeting Notes Summarizer</h2>
+                    <p>Convert lengthy notes into concise, actionable summaries</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="form-section">
+                        <form id="notesForm">
+                            <div class="form-group">
+                                <label for="notesTitle">Meeting Title</label>
+                                <input type="text" id="notesTitle" placeholder="e.g., Q3 Planning Session">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notesDate">Meeting Date</label>
+                                <input type="date" id="notesDate">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notesAttendees">Attendees</label>
+                                <input type="text" id="notesAttendees" placeholder="Comma-separated names">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notesContent">Meeting Notes *</label>
+                                <textarea id="notesContent" placeholder="Paste your meeting notes here..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <i class="fas fa-wand-magic-sparkles"></i> Summarize Notes
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="output-section">
+                        <div id="notesOutput" class="output-box">
+                            <p class="placeholder-text">Your summary will appear here...</p>
+                        </div>
+                        <button id="copyNotesBtn" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-copy"></i> Copy Summary
+                        </button>
+                        <button id="downloadNotesBtn" class="btn btn-secondary" style="display: none; margin-left: 10px;">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Task Planner Tab -->
+        <section id="task-planner" class="tab-content" data-tab="planner">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-tasks"></i> AI Task Planner & Scheduler</h2>
+                    <p>Generate structured plans with prioritization and time optimization</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="form-section">
+                        <form id="plannerForm">
+                            <div class="form-group">
+                                <label for="planPeriod">Planning Period *</label>
+                                <select id="planPeriod" required>
+                                    <option value="">Select period...</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="planDate">Start Date *</label>
+                                <input type="date" id="planDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="planHours">Available Hours per Day *</label>
+                                <input type="number" id="planHours" min="1" max="24" value="8" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="planTasks">Tasks to Schedule *</label>
+                                <textarea id="planTasks" placeholder="List your tasks with estimated duration. E.g:&#10;- Project report (2 hours)&#10;- Client meeting (1 hour)&#10;- Code review (1.5 hours)" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="planPriorities">Priorities & Constraints</label>
+                                <textarea id="planPriorities" placeholder="Any specific deadlines, dependencies, or constraints?"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <i class="fas fa-wand-magic-sparkles"></i> Generate Plan
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="output-section">
+                        <div id="plannerOutput" class="output-box">
+                            <p class="placeholder-text">Your optimized plan will appear here...</p>
+                        </div>
+                        <button id="copyPlanBtn" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-copy"></i> Copy Plan
+                        </button>
+                        <button id="downloadPlanBtn" class="btn btn-secondary" style="display: none; margin-left: 10px;">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Tab -->
+        <section id="about" class="tab-content" data-tab="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About SBU Productivity Assistant</h2>
+                </div>
+
+                <div class="about-content">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Smart Email Generator</h3>
+                        <p>Generate context-based professional emails with tone variations (formal, informal, persuasive) adapted to your audience (client, manager, team). Save time and ensure consistent, professional communication.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Meeting Notes Summarizer</h3>
+                        <p>Convert lengthy meeting notes into concise summaries. Automatically extract key points, decisions, action items, and highlight deadlines and responsibilities for easy tracking.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3>AI Task Planner & Scheduler</h3>
+                        <p>Generate structured daily or weekly plans with intelligent task prioritization based on urgency and importance. Get time optimization strategies to maximize productivity.</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Fully responsive design - works on desktop, tablet, and mobile</li>
+                            <li><i class="fas fa-check"></i> Modern, professional UI/UX</li>
+                            <li><i class="fas fa-check"></i> Easy navigation and intuitive interface</li>
+                            <li><i class="fas fa-check"></i> AI-powered content generation</li>
+                            <li><i class="fas fa-check"></i> Copy and download functionality</li>
+                            <li><i class="fas fa-check"></i> Deployed online via GitHub Pages</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>How to Use</h3>
+                        <ol>
+                            <li>Select the tool you want to use from the navigation menu</li>
+                            <li>Fill in the required information</li>
+                            <li>Click the generate button</li>
+                            <li>Review the AI-generated output</li>
+                            <li>Copy to clipboard or download as needed</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 SBU Productivity Assistant. All rights reserved.</p>
+            <p>AI-powered workplace productivity tool | <a href="https://github.com/CeeBuda/AI-Productivity-Assistant" target="_blank">View on GitHub</a></p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
